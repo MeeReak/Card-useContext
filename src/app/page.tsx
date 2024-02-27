@@ -1,7 +1,7 @@
 "use client";
 
 import ContextProvider, { MyContext } from "@/Utils/context";
-import { CardList, FormAdd, FormUpdate, Modal } from "@/components";
+import { CardList, FormAdd, FormUpdate, InputSearch, Modal } from "@/components";
 import React from "react";
 
 export default function Home() {
@@ -19,6 +19,7 @@ function MyComponent() {
 
   return (
     <>
+      <InputSearch/>
       <CardList />
       <Modal>{selectCard ? <FormUpdate /> : <FormAdd />}</Modal>
     </>

@@ -4,21 +4,36 @@ import React, { useContext } from "react";
 import { MyContext } from "@/Utils/context";
 import Card from "./card";
 
+
+
 const CardList = () => {
-  const { info }: any = useContext(MyContext);
+  const { info, key }: any = useContext(MyContext);
 
   return (
     <div className="flex items-center flex-col gap-2">
-      {info.map((item: any, index: number) => (
-        <Card
-          id={item.id}
-          age={item.age}
-          name={item.name}
-          key={index}
-          alt={item.name}
-          src={item.image}
-        />
-      ))}
+      {key
+        ? info
+            .filter((item: Item) =>
+              item.name.toLowerCase().includes(key.toLowerCase())
+            )
+            .map((item, index) => (
+              <Card
+                id={item.id}
+                name={item.name}
+                age={item.age}
+                key={index}
+                src={item.image}
+              />
+            ))
+        : info.map((item, index) => (
+            <Card
+              id={item.id}
+              name={item.name}
+              age={item.age}
+              key={index}
+              src={item.image}
+            />
+          ))}
     </div>
   );
 };

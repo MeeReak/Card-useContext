@@ -2,11 +2,10 @@
 
 import { MyContext } from "@/Utils/context";
 import { InputFile, InputForm } from "@/components/atoms";
-import { info } from "console";
 import React, { useContext, useState } from "react";
 
 const FormUpdate = () => {
-  const { addInfo, updateInfo, info, selectCard }: any = useContext(MyContext);
+  const { updateInfo, info, selectCard }: any = useContext(MyContext);
 
   const updateCard = info.filter((item: any) => item.id === selectCard);
 

@@ -32,6 +32,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 
   const [selectCard, setSelectCard] = useState(""); // store id card that selected
 
+  const [key, setKey] = useState("");
+
   function addInfo(e: { preventDefault: () => void }, newInfo: any) {
     e.preventDefault();
     const newId = Math.random().toString(36).substring(2, 8); // return 1f74e
@@ -68,6 +70,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     selectCard,
     updateInfo,
     deleteInfo,
+    key,
+    setKey
   };
 
   return (
