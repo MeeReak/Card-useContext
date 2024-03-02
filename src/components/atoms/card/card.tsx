@@ -1,6 +1,6 @@
 "use client";
 
-import { MyContext } from "@/Utils/context";
+import { MyContext } from "@/context/context";
 import Image from "next/image";
 import React, { useContext } from "react";
 
@@ -18,7 +18,7 @@ const Card: React.FC<CardProp> = ({
   name = "",
   age = "",
 }) => {
-  const { setSelectCard, selectCard, deleteInfo }: any = useContext(MyContext);
+  const { setSelectCard, selectCard, deleteInfo }= useContext(MyContext);
 
   return (
     <div
@@ -27,7 +27,6 @@ const Card: React.FC<CardProp> = ({
           setSelectCard("");
         } else {
           setSelectCard(id);
-          console.log(selectCard);
         }
       }}
     >
@@ -48,10 +47,13 @@ const Card: React.FC<CardProp> = ({
             height={100}
           />
 
-          <button onClick={(e)=>{
-            e.stopPropagation()
-            deleteInfo(id)
-          }} className="text-pink-500 hover:text-pink-700 focus:outline-none">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteInfo(id);
+            }}
+            className="text-pink-500 hover:text-pink-700 focus:outline-none"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

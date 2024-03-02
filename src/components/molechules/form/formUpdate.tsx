@@ -1,22 +1,24 @@
 "use client";
 
-import { MyContext } from "@/Utils/context";
+import { MyContext } from "@/context/context";
 import { InputFile, InputForm } from "@/components/atoms";
 import React, { useContext, useState } from "react";
+import { userValidetion } from "@/schema/schema";
+import * as Yup from "yup";
 
 const FormUpdate = () => {
-  const { updateInfo, info, selectCard }: any = useContext(MyContext);
+  const { updateInfo, info, selectCard } = useContext(MyContext);
 
-  const updateCard = info.filter((item: any) => item.id === selectCard);
-
-  console.log("update", updateCard);
+  const updateCard = info.filter((item) => item.id === selectCard);
 
   const [user, setUser] = useState({
     id: updateCard[0].id,
     name: updateCard[0].name,
     age: updateCard[0].age,
-    image: updateCard[0].image,
+    image: updateCard[0].image || "",
   });
+
+  const [error, setError] = useState<{ [key: string]: string }>({});
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUser({
@@ -30,9 +32,28 @@ const FormUpdate = () => {
     setUser({ ...user, image: ImgUrl });
   }
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      await userValidetion.validate(user, { abortEarly: false });
+      updateInfo(user);
+    } catch (error) {
+      console.log(error);
+      if (error instanceof Yup.ValidationError) {
+        const newErrors: { [key: string]: string } = {};
+        error.inner.forEach((e) => {
+          if (e.path) {
+            newErrors[e.path] = e.message;
+          }
+        });
+        setError(newErrors);
+      }
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => updateInfo(e, user)}
+      onSubmit={handleSubmit}
       className="absolute border top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-8 rounded-lg shadow-lg"
     >
       <div className="w-64">
@@ -49,6 +70,7 @@ const FormUpdate = () => {
             value={user.name}
             onHandChange={handleChange}
           />
+          {error.name && <p className="text-red-500">{error.name}</p>}
         </div>
 
         <div className="mb-4">
@@ -64,6 +86,7 @@ const FormUpdate = () => {
             type="number"
             onHandChange={handleChange}
           />
+          {error.age && <p className="text-red-500">{error.age}</p>}
         </div>
 
         <div className="mb-4">
@@ -74,6 +97,7 @@ const FormUpdate = () => {
             File
           </label>
           <InputFile name="image" type="file" onHandChange={handleFileChange} />
+          {error.image && <p className="text-red-500">{error.image}</p>}
         </div>
 
         <button

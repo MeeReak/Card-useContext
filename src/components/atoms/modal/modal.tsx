@@ -3,7 +3,7 @@
 import { ReactNode, useContext, useState } from "react";
 import { motion } from "framer-motion"; // import motion from framer-motion
 import FloatingBtn from "../button/floatingBtn";
-import { MyContext } from "@/Utils/context";
+import { MyContext } from "@/context/context";
 
 interface ModalProps {
   children?: ReactNode;
@@ -63,7 +63,7 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
               x: "100%",
             }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className=" fixed bg-pink-300 tex t-white shadow-lg top-0 right-0 w-full max-w-sm h-screen p-5"
+            className=" fixed bg-pink-300 tex t-white shadow-lg top-0 right-0 w-full max-w-lg h-screen p-5"
           >
             <button
               onClick={() => setIsShowModal((sideBar) => !sideBar)}

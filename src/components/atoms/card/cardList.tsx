@@ -1,39 +1,29 @@
 "use client";
 
 import React, { useContext } from "react";
-import { MyContext } from "@/Utils/context";
+import { MyContext } from "@/context/context";
 import Card from "./card";
 
-
-
 const CardList = () => {
-  const { info, key }: any = useContext(MyContext);
+  const { info, key } = useContext(MyContext);
 
   return (
     <div className="flex items-center flex-col gap-2">
-      {key
-        ? info
-            .filter((item: Item) =>
-              item.name.toLowerCase().includes(key.toLowerCase())
-            )
-            .map((item, index) => (
-              <Card
-                id={item.id}
-                name={item.name}
-                age={item.age}
-                key={index}
-                src={item.image}
-              />
-            ))
-        : info.map((item, index) => (
-            <Card
-              id={item.id}
-              name={item.name}
-              age={item.age}
-              key={index}
-              src={item.image}
-            />
-          ))}
+      {info
+        .filter((item) => {
+          return key.trim() === ""
+            ? item
+            : item.name.toLowerCase().includes(key.toLowerCase());
+        })
+        .map((item, index) => (
+          <Card
+            id={item.id}
+            name={item.name}
+            age={item.age}
+            key={index}
+            src={item.image || undefined}
+          />
+        ))}
     </div>
   );
 };

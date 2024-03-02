@@ -3,7 +3,7 @@ import React from "react";
 interface InputForm {
   type: string;
   name: string;
-  value: string;
+  value?: string;
   onHandChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

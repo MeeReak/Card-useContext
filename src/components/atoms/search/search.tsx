@@ -1,11 +1,10 @@
 "use client";
 
-import { MyContext } from "@/Utils/context";
+import { MyContext } from "@/context/context";
 import React, { useContext } from "react";
 
-
 const InputSearch = () => {
-  const { setKey }: any = useContext(MyContext);
+  const { setKey } = useContext(MyContext);
 
   return (
     <div className="w-[325px] fixed">
