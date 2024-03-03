@@ -5,9 +5,11 @@ import { InputFile, InputForm } from "@/components/atoms";
 import React, { useContext, useState } from "react";
 import { userValidetion } from "@/schema/schema";
 import * as Yup from "yup";
+import { useModal } from "@/context/modalContext";
 
 const FormUpdate = () => {
   const { updateInfo, info, selectCard } = useContext(MyContext);
+  const { setIsShowModal } = useModal();
 
   const updateCard = info.filter((item) => item.id === selectCard);
 
@@ -49,6 +51,7 @@ const FormUpdate = () => {
         setError(newErrors);
       }
     }
+    setIsShowModal(false);
   }
 
   return (

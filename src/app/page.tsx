@@ -9,6 +9,7 @@ import {
   Modal,
 } from "@/components";
 import React from "react";
+import ModalProvider from "@/context/modalContext";
 
 export default function Home() {
   return (
@@ -25,9 +26,11 @@ function MyComponent() {
 
   return (
     <>
-      <InputSearch />
-      <CardList />
-      <Modal>{selectCard ? <FormUpdate /> : <FormAdd />}</Modal>
+      <ModalProvider>
+        <InputSearch />
+        <CardList />
+        <Modal>{selectCard ? <FormUpdate /> : <FormAdd />}</Modal>
+      </ModalProvider>
     </>
   );
 }

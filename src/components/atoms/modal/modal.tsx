@@ -4,6 +4,7 @@ import { ReactNode, useContext, useState } from "react";
 import { motion } from "framer-motion"; // import motion from framer-motion
 import FloatingBtn from "../button/floatingBtn";
 import { MyContext } from "@/context/context";
+import { useModal } from "@/context/modalContext";
 
 interface ModalProps {
   children?: ReactNode;
@@ -11,7 +12,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ children }) => {
-  const [isShowModal, setIsShowModal] = useState(false);
+  const { isShowModal, setIsShowModal } = useModal()
   const { selectCard }: any = useContext(MyContext);
 
   return (

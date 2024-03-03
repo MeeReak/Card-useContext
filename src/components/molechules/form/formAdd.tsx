@@ -5,9 +5,11 @@ import { InputFile, InputForm } from "@/components/atoms";
 import React, { useContext, useState } from "react";
 import { userValidetion } from "@/schema/schema";
 import * as Yup from "yup";
+import { useModal } from "@/context/modalContext";
 
 const FormAdd = () => {
   const { addInfo } = useContext(MyContext);
+  const { setIsShowModal } = useModal();
 
   const [user, setUser] = useState({
     id: "",
@@ -48,6 +50,7 @@ const FormAdd = () => {
         setError(newErrors);
       }
     }
+    setIsShowModal(false);
   }
 
   return (
